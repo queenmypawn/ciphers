@@ -60,6 +60,10 @@ def vignere_cipher(plaintext, key, all_lowercase = False, all_uppercase = False)
     # (like an int or a phrase that includes non-alphabetic characters).
     #(Coming soon)
 
+    # Currently the vignere_cipher is not compatible with non-alphabetic characters
+    # like periods and spaces, but this is an easy fix.
+    # (Coming soon)
+
     ciphered_text = []
 
     # Convert the string into a list of letters and perform the correct
@@ -98,9 +102,9 @@ def vignere_cipher(plaintext, key, all_lowercase = False, all_uppercase = False)
 alphabet_caps = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' # 65-90
 alphabet = 'abcdefghijklmnopqrstuvwxyz' # 97-122
 
-phrase = 'sEcReTMesSAGE'
+phrase = 'secretmessage'
 # caesar_key = 5
-vignere_key = 'aPpLe'
+vignere_key = 'apple'
 
 # print("Output of Caesar Cipher with a shift of " + str(caesar_key) + " is " + caesar_cipher(phrase, caesar_key))
 print("Output of Vignere Cipher with a shift of " + vignere_key + " is " + vignere_cipher(phrase, vignere_key))
