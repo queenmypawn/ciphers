@@ -56,7 +56,8 @@ def caesar_cipher(plaintext, key, all_lowercase = False, all_uppercase = False):
 # The Vignere Cipher is a polyalphabetic extension of the Caesar Cipher.
 def vignere_cipher(plaintext, key, all_lowercase = False, all_uppercase = False):
 
-# Verify that the key is actually a string and not an int.
+    # Verify that the key is actually a valid string and not something else 
+    # (like an int or a phrase that includes non-alphabetic characters).
     #(Coming soon)
 
     ciphered_text = []
@@ -80,8 +81,15 @@ def vignere_cipher(plaintext, key, all_lowercase = False, all_uppercase = False)
         current_vignere_letter = key[counter % len(key)]
         current_vignere_ord = ord(current_vignere_letter)
 
+        # Currently the ordinal is within ranges 65 - 90 and 97 - 122.
+        # Convert it into a range of 0 - 25 before proceeding.
+        if current_vignere_ord >= 65 and current_vignere_ord <= 90:
+            poly_rotation = current_vignere_ord - 65
+        elif current_vignere_ord >= 97 and current_vignere_ord <= 122:
+            poly_rotation = current_vignere_ord - 97
+
         # Perform the Caesar Cipher on the letter.
-        ciphered_text.append(caesar_cipher(current_letter, current_vignere_ord))
+        ciphered_text.append(caesar_cipher(current_letter, poly_rotation))
 
         counter += 1
     
@@ -90,7 +98,9 @@ def vignere_cipher(plaintext, key, all_lowercase = False, all_uppercase = False)
 alphabet_caps = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' # 65-90
 alphabet = 'abcdefghijklmnopqrstuvwxyz' # 97-122
 
-phrase = 'test'
+phrase = 'sEcReTMesSAGE'
+# caesar_key = 5
+vignere_key = 'aPpLe'
 
-print("Output of Caesar Cipher with a left shift of 350 is " + caesar_cipher(phrase, -7))
-print("Output of Vignere Cipher with a key shift of 'Misc' is " + vignere_cipher(phrase, 'abc'))
+# print("Output of Caesar Cipher with a shift of " + str(caesar_key) + " is " + caesar_cipher(phrase, caesar_key))
+print("Output of Vignere Cipher with a shift of " + vignere_key + " is " + vignere_cipher(phrase, vignere_key))
